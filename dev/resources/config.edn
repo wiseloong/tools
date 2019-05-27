@@ -1,0 +1,2 @@
+{:rest-api    {:access-control-allow-origin [".*"]}
+ :application {:name "demo"}}
