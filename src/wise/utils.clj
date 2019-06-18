@@ -123,16 +123,16 @@
          (map merge-data)
          (filter differ))))
 
-(defn collection-map-key
+(defn coll-map-key
   "把map集合里，k的值v相同的map合并，以v值作为新key，结果为{:v [m1,m2] :v2 []}
   k的值需要为字符串，不能是数字等"
-  ([coll k] (collection-map-key coll k {}))
+  ([coll k] (coll-map-key coll k {}))
   ([coll k r]
    (let [one (first coll)]
      (if-not (nil? one)
        (let [k1 (keyword (k one))
              v1 (conj (k1 r) one)]
-         (collection-map-key (next coll) k (assoc r k1 v1)))
+         (coll-map-key (next coll) k (assoc r k1 v1)))
        r))))
 
 (defn any-empty? "判断是否为空，遇到数字类型不报错"
