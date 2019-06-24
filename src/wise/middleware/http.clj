@@ -18,8 +18,12 @@
               (if (empty? data)
                 (no-content)
                 (ok data)))
-            (if (cstr/includes? (headers "Content-Type") "text/html")
-              (ok body)
+            (if headers
+              (if-let [content-type (headers "Content-Type")]
+                (if (cstr/includes? content-type "text/html")
+                  (ok body)
+                  response)
+                response)
               response))
           (no-content))
         response)
