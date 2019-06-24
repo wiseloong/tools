@@ -52,10 +52,10 @@
   ([params f] (merge (headers-opts-res-json f) {:params params})))
 
 (defn- reset-ajax [uri f1 f2 f3]
-  (reset! meta! {:service-uris       uri
-                     :save-handler   f1
-                     :delete-handler f2
-                     :error-handler  f3}))
+  (reset! meta! {:service-uris   uri
+                 :save-handler   f1
+                 :delete-handler f2
+                 :error-handler  f3}))
 
 (defn init!
   ([uri]
@@ -67,6 +67,13 @@
   ([uri save-fn delete-fn error-fn]
    (when (empty? @meta!)
      (reset-ajax uri save-fn delete-fn error-fn))))
+
+(defn get-unity!
+  "获取单个结果，比如字符串"
+  ([url f]
+   (GET (merge-url url) (headers-opts f)))
+  ([url params f]
+   (GET (merge-url url) (headers-opts params f))))
 
 (defn get!
   ([url f]
